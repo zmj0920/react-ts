@@ -5,32 +5,10 @@
 意在站在前辈的肩膀，分享个人对技术的通俗理解，共同成长！
 
 > Author:君吟
+
 > Email: 506499594@qq.com  
+
 > github: https://github.com/zmj0920/
-
-***
-
-在本文我将和大家一起玩转Typescript，目前angular、deno已经开始使用typescript，
-并且我们熟知的vue，在3.0也即将会使用typescript，可以说，前端领域，
-typescript会逐渐变为必备的技能，那么，为什么typescript变得越来越火呢？
-
-网上有各种typescript和javascript的对比，那么在我的角度的理解，javascript是解释型（动态）
-语言，可以说是从上到下执行，在我们开发过程中，比如有语法错误等等，需要执行到这一行代码才能知道
-，而typescript则像写易语言那样生成exe时，需要静态编译，而静态编译这个过程，会把代码都检查一遍，
-看是否通过检测，最终才生成exe，typescript最终是也是编译成javascript原生代码的，只是在这个生成过程中，
-会进行各种检测，来检查代码是否符合语法啊规则啊，符合的话最终再编译成javascript，规范了我们代码的编写，
-同时也提高了代码的复用以及组件化，在runtime阶段为我们提前找到错误。
-
-
-
-typescript支持es5/es6的语法，并且扩展了javascript语法，更像java、c#、swift这种语言了。
-
-在前端nodejs很火，但是为什么在后端却不火，很大程度也是因为nodejs也是解释型（动态）语言，
-优势就是解释型语言比较灵活，但是缺点也很明显，用node开发后台程序，开发一直爽，重构火葬场=。=！
-一旦重构了，就会出现很多问题，像Java、c#这类语言，非常严谨，类型检查等非常严谨，而javascript呢，一般是靠我们用肉眼去排查，很麻烦，typescript就是解决这一类问题的。
-
-总而言之，typescript是未来的趋势，也是谷歌推荐的框架，我也是刚学typescript，很多都是站在前辈的肩膀总结的，
-废话不多说，我们开始进入正题吧！
 
 
 
