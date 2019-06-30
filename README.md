@@ -35,6 +35,7 @@ age = 29;
 ```
 
 #### 字符串类型string
+
 ```
 let name:string = "君吟"
 name = "iamswr"
