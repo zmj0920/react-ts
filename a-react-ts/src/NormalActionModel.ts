@@ -1,3 +1,4 @@
+
 import { NormalModel } from './NormalModel';
 
 export abstract class NormalActionModel<Payload extends RM.AnyObject = {}> extends NormalModel<RM.DoNotUseReducer, Payload> {

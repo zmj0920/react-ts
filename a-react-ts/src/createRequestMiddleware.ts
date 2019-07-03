@@ -1,3 +1,5 @@
+//创建请求
+
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { Dispatch, Middleware, MiddlewareAPI } from 'redux';
 import { HTTP_STATUS_CODE, METHOD } from './util';
