@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
 import { applyMiddleware, compose, createStore } from 'redux';
-import { rootReducers } from './reducers';
-import { rootMiddleWares } from './middleware';
-import App from '../components/App';
+import { rootReducers } from './entries/reducers';
+import { rootMiddleWares } from './entries/middleware';
+import App from './components/App';
 
 const store = createStore(
   rootReducers,
