@@ -2,11 +2,6 @@ import React, { CSSProperties, FunctionComponent, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { counterModel } from '../models/normal/CounterModel';
 import { resetModel } from '../models/normal/ResetModel';
-// import 'antd/dist/antd.css';
-// import { Button } from 'antd';
-
-
-
 const styles: CSSProperties = {
   width: 300,
   height: 300,
@@ -26,22 +21,23 @@ const Normal: FunctionComponent = () => {
   const count = counterModel.useData((data) => data.amount);
 
   const handleClick = useCallback(() => {
+    //++
     dispatch(counterModel.action());
   }, []);
 
   const handleReset = useCallback(() => {
+    //--
     dispatch(resetModel.action());
   }, []);
 
   return (
     <div style={styles}>
-      {/* <Button>123</Button> */}
       <h3>Normal Effect:</h3>
       <p>You clicked <span style={{ fontSize: 18, color: '#f00' }}>{count}</span> times.</p>
       <div>
-        <button onClick={handleClick} style={{ width: 100, height: 30 }}>Click Button</button>
+        <button onClick={handleClick} style={{ width: 100, height: 30 }}>+</button>
         &nbsp;&nbsp;
-        <button onClick={handleReset} style={{ width: 80, height: 30 }}>Reset</button>
+        <button onClick={handleReset} style={{ width: 80, height: 30 }}>-</button>
       </div>
     </div>
   );
