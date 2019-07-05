@@ -23,7 +23,7 @@ class SummaryModel extends ReducerModel<Data> {
     };
   }
 
-  protected getEffects(): RM.ReducerEffects<Data> {
+  protected getEffects(): RM.ReducerEffects <Data> {
     return [
       {
         when: counterModel.getSuccessType(),
