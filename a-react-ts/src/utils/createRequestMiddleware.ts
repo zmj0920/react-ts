@@ -1,8 +1,7 @@
-//创建请求
-
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { Dispatch, Middleware, MiddlewareAPI } from 'redux';
-import { HTTP_STATUS_CODE, METHOD } from './util';
+import { HTTP_STATUS_CODE } from './httpStatusCode';
+import { METHOD } from './method';
 
 interface FailTransform {
   httpStatus?: HTTP_STATUS_CODE;
@@ -10,15 +9,15 @@ interface FailTransform {
   businessCode?: string;
 }
 
-type MixedReturn = RM.MiddlewareEffect | RM.RequestAction;
+type MixedReturn = RM.FetchHandle | RM.RequestAction;
 
-export const createRequestMiddleware = <State extends RM.AnyObject>(config: {
+export const createRequestMiddleware = <RootState = any>(config: {
   id: string;
   baseUrl: string;
   axiosConfig?: AxiosRequestConfig;
-  onInit?: (api: MiddlewareAPI<Dispatch, State>, action: RM.RequestAction) => void;
+  onInit?: (api: MiddlewareAPI<Dispatch, RootState>, action: RM.RequestAction) => void;
   getTimeoutMessage?: () => string;
-  getHeaders: (api: MiddlewareAPI<Dispatch, State>) => RM.AnyObject;
+  getHeaders: (api: MiddlewareAPI<Dispatch, RootState>) => object;
   onFail: (error: RM.HttpError, transform: FailTransform) => void;
   onShowSuccess: (message: string) => void;
   onShowError: (message: string) => void;
@@ -31,7 +30,7 @@ export const createRequestMiddleware = <State extends RM.AnyObject>(config: {
     ...config.axiosConfig,
   });
 
-  const middleware: Middleware<{}, State> = (api) => (next) => (action: RM.RequestAction): MixedReturn => {
+  const middleware: Middleware<{}, RootState> = (api) => (next) => (action: RM.RequestAction): MixedReturn => {
     if (action.middleware !== config.id) {
       return next(action);
     }

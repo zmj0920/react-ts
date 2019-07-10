@@ -1,8 +1,9 @@
-import {Middleware} from 'redux';
-import { createRequestMiddleware, RequestModel } from '../../src';
+import { Middleware } from 'redux';
+import thunk from 'redux-thunk';
+import { createRequestMiddleware, Model } from '../../src';
 
 const apiMiddleware = createRequestMiddleware({
-  id: RequestModel.middlewareName,
+  id: Model.middlewareName,
   baseUrl: 'https://registry.npm.taobao.org',
   getHeaders: () => {
     return {
@@ -24,4 +25,4 @@ const apiMiddleware = createRequestMiddleware({
   },
 });
 
-export const rootMiddleWares: Middleware[] = [apiMiddleware];
+export const rootMiddleWares: Middleware[] = [thunk, apiMiddleware];

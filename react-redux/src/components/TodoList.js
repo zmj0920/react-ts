@@ -12,7 +12,7 @@ class TodoList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      userList: []  // 商店列表
+      userList: []  // 用户列表
     }
   }
 
@@ -66,8 +66,6 @@ class TodoList extends Component {
                       <td>{item.user_name}</td>
                       <td>{item.gender}</td>
                       <td>
-                        {/* <a href="#" >删除</a>
-                        <a href="#">修改</a> */}
                         <Button>删除</Button>
                         <Button>修改</Button>
                       </td>

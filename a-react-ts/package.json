@@ -1,6 +1,6 @@
 {
   "name": "redux-model-ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [
     "redux-model",
     "redux",
@@ -9,8 +9,8 @@
   ],
   "main": "index.js",
   "types": "index.d.ts",
-  "repository": "",
-  "author": " ",
+  "repository": "https://github.com/fwh1990/redux-model-ts",
+  "author": "",
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server"
@@ -21,22 +21,24 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "tslib": "^1.10.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "redux": "^4.0.1",
-    "react-router-dom": "^5.0.1",
-    "@types/react": "^16.8.22",
-    "@types/react-dom": "^16.8.4",
-    "@types/react-redux": "^7.1.0",
-    "@types/react-router-dom": "^4.3.4",
-    "connected-react-router": "^6.4.0"
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "typescript": "^3.5.2",
-    "@types/node": "^12.0.0",
+    "@types/node": "^12.6.1",
+    "@types/react-redux": "^7.1.1",
     "@types/webpack-env": "^1.13.9",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.2",
+    "redux-thunk": "^2.3.0",
+    "typescript": "^3.5.3",
     "@types/html-webpack-plugin": "^3.2.0",
+    "@types/react": "^16.8.22",
+    "@types/react-dom": "^16.8.4",
     "@types/webpack": "^4.4.34",
     "awesome-typescript-loader": "^5.2.1",
     "html-webpack-plugin": "^3.2.0",

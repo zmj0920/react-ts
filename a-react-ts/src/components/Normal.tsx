@@ -1,7 +1,7 @@
 import React, { CSSProperties, FunctionComponent, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { counterModel } from '../models/normal/CounterModel';
-import { resetModel } from '../models/normal/ResetModel';
+import { counterModel } from '../models/CounterModel';
+
 const styles: CSSProperties = {
   width: 300,
   height: 300,
@@ -21,13 +21,11 @@ const Normal: FunctionComponent = () => {
   const count = counterModel.useData((data) => data.amount);
 
   const handleClick = useCallback(() => {
-    //++
-    dispatch(counterModel.action());
+    dispatch(counterModel.increase.action());
   }, []);
 
   const handleReset = useCallback(() => {
-    //--
-    dispatch(resetModel.action());
+    dispatch(counterModel.resetThunk());
   }, []);
 
   return (
@@ -35,9 +33,9 @@ const Normal: FunctionComponent = () => {
       <h3>Normal Effect:</h3>
       <p>You clicked <span style={{ fontSize: 18, color: '#f00' }}>{count}</span> times.</p>
       <div>
-        <button onClick={handleClick} style={{ width: 100, height: 30 }}>+</button>
+        <button onClick={handleClick} style={{ width: 100, height: 30 }}>Click Button</button>
         &nbsp;&nbsp;
-        <button onClick={handleReset} style={{ width: 80, height: 30 }}>-</button>
+        <button onClick={handleReset} style={{ width: 80, height: 30 }}>Reset</button>
       </div>
     </div>
   );

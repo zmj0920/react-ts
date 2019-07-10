@@ -20,6 +20,18 @@ class API extends Server{
       throw err
     }
   }
+  async AddUser(data){
+    try{
+      let result = await this.axios('post', 'http://localhost:3000/adduser', data); 
+      if(result && result.status === 1){
+        return result;
+      }else{
+        throw err;
+      }
+    }catch(err){
+      throw err;
+    }
+  }
 }
 
 export default new API()
