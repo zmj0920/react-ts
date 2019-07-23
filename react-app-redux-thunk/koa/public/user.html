@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="stylesheets/bootstrap.css">
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/popper.min.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/vue.min.js"></script>
+    <script src="javascripts/axios.min.js"></script>
+</head>
+<body>
+<div id="app" class="container">
+  <from >
+    <div class="form-group">
+        <label>用户名</label>
+        <input type="text" class="form-control form-text" v-model="userlist.uname"  placeholder="用户名">
+    </div>
+    <div class="form-group">
+        <label>邮箱</label>
+        <input type="email" class="form-control form-text" v-model="userlist.email"  placeholder="邮箱">
+    </div>
+    <div class="form-group">
+        <label>联系方式</label>
+        <input  type="text" class="form-control form-text" v-model="userlist.phone"  placeholder="联系方式">
+    </div>
+    <div class="form-group">
+        <label>真实姓名</label>
+        <input  type="text" class="form-control form-text" v-model="userlist.user_name"  placeholder="真实姓名">
+    </div>
+
+    <div class="form-group">
+        <label>性别：</label>
+       <label for=""> 
+            <input type="radio"  name="sex" class="radio"  value="1"  v-model="userlist.gender">男
+       </label>
+        <label for="">  
+            <input type="radio"  name="sex" class="radio"  value="0"  v-model="userlist.gender">女
+        </label>
+    </div>
+
+    <button type="submit" v-on:click="AddUser" class="btn btn-block btn-info">添加</button>
+  </from>
+  <table  class="table table-light table-bordered">
+    <thead>
+        <tr>
+            <th>登录名称</th>
+            <th>电子邮箱</th>
+            <th>联系方式</th>
+            <th>真实姓名</th>
+            <th>用户性别</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr v-for="item in user">
+            <td>{{item.uname}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.phone}}</td>
+            <td>{{item.user_name}}</td>
+            <td>{{item.gender==1?'男':'女'}}</td>
+            <td>
+                <a href="javascript:viod(0)" v-on:click="Deletes(item.uid)" >删除</a>
+                <a href="javascript:viod(0)"  data-toggle="modal" data-target="#modals"
+                v-on:click="openUpdate(item)">修改</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="modal" id="modals">
+        <div class="modal-dialog">
+             <div class="modal-content">
+                     <div class="modal-header">
+                         用户信息
+                         <button type="button" class="close" data-dismiss="modal">
+                             <span>&times;</span>
+                         </button>
+                     </div>
+                 <div class="modal-header"></div>
+                 <div class="modal-body">
+                        <div class="form-group">
+                                <label>用户名</label>
+                                <input type="text" class="form-control form-text"
+                                 v-model="users.uname"  placeholder="用户名">
+                            </div>
+                            <div class="form-group">
+                                <label>邮箱</label>
+                                <input type="email" class="form-control form-text"
+                                 v-model="users.email"  placeholder="邮箱">
+                            </div>
+                            <div class="form-group">
+                                <label>联系方式</label>
+                                <input  type="text" class="form-control form-text"
+                                 v-model="users.phone"  placeholder="联系方式">
+                            </div>
+                            <div class="form-group">
+                                <label>真实姓名</label>
+                                <input  type="text" class="form-control form-text"
+                                 v-model="users.user_name"  placeholder="真实姓名">
+                            </div>
+                            <div class="form-group">
+                                <label>性别：</label>
+                               <label for=""> 
+                                    <input type="radio"  name="sex" class="radio"
+                                      value="1"  v-model="users.gender">男
+                               </label>
+                                <label for="">  
+                                    <input type="radio"  name="sex" class="radio" 
+                                     value="0"  v-model="users.gender">女
+                                </label>
+                            </div>
+                    </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                     <button type="button" class="btn btn-primary" v-on:click="UpdateUser">保存</button>
+                 </div>
+             </div>
+       </div>
+    </div>
+</div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                user: [],
+                userlist:{uname:"",upwd:"",email:"",phone:"",avatar:"1.jpg",user_name:"",gender:1},
+                users:{uid:"",uname:"",email:"",phone:"",user_name:"",gender:""},
+            },
+            mounted: function () {
+                //初始化函数
+                this.Init();
+            },
+            methods: {
+                //查询用户
+                Init: function () {
+                    axios.get("/user").then(
+                        res => {
+                            this.user = res.data;
+                            console.log(res.data);
+                        }).catch(
+                            error => {
+                                console.log(error);
+                            });
+                },
+                //删除
+                Deletes: function (uid) {
+                     axios.post("/userdelete",{uid:uid}).then(res=>{
+                              this.Init();
+                             console.log(res.data);
+                     }).catch((err)=>{
+                              console.log(err);
+                     })
+                },
+                openUpdate:function(user){
+                    this.users.uname=user.uname;
+                    this.users.email=user.email;
+                    this.users.phone=user.phone;
+                    this.users.user_name=user.user_name;
+                    this.users.uid=user.uid;
+                    this.users.gender=user.gender;
+                },
+                UpdateUser:function(){
+                   //uname=?,email=?,phone=?,user_name=?,gender=? where uid=?;`
+                    var userinfo={
+                        uname:this.users.uname,
+                        email:this.users.email,
+                        phone: this.users.phone,
+                        user_name: this.users.user_name,
+                        gender:this.users.gender,
+                        uid:this.users.uid
+                    }
+                    axios.post('/userupdate',userinfo).then((res)=>{
+                        this.Init();
+                             console.log(res.data);
+                    }).catch((err)=>{
+                              console.log(err);
+                     });
+                },
+                //添加用户
+                AddUser:function(){
+                   axios.post("/adduser",{uname:this.userlist.uname,
+                    upwd:this.userlist.upwd,email:this.userlist.email,
+                    phone:this.userlist.phone,avatar:this.userlist.avatar,
+                    user_name:this.userlist.user_name,gender:this.userlist.gender
+                }).then(res=>{
+                              this.Init();
+                             console.log(res.data);
+                     }).catch((err)=>{
+                              console.log(err);
+                     })
+                }
+            }
+        });
+    </script>
+</body>

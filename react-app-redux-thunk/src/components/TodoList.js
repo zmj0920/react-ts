@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import 'antd/dist/antd.css'
-// import { Input, Button, List } from 'antd'
 import store from '../store'
-import axios from 'axios'
 import TodoListUI from './TodoListUI'
 //关键代码-------------start
-import { changeInputAction, addItemAction, deleteItemAction, getListAction } from '../store/actionCreatores'
+import { getTodoList, changeInputAction, addItemAction, deleteItemAction } from '../store/actionCreatores'
 //关键代码------------end
 
 class TodoList extends Component {
@@ -19,17 +16,15 @@ class TodoList extends Component {
         this.deleteItem = this.deleteItem.bind(this)
     }
     componentDidMount() {
-        axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList').then((res) => {
-            const data = res.data
-            const action = getListAction(data)
-            store.dispatch(action)
-        })
+        const action = getTodoList()
+       // getTodoList()
+        store.dispatch(action)
     }
     storeChange() {
-        console.log('store changed')
-        this.setState(store.getState())
-    }
-    //--------关键代码------start
+            console.log('store changed')
+            this.setState(store.getState())
+        }
+        //--------关键代码------start
     changeInputValue(e) {
         const action = changeInputAction(e.target.value)
         store.dispatch(action)
@@ -43,16 +38,15 @@ class TodoList extends Component {
         store.dispatch(action)
     }
     render() {
-        return (
-            <TodoListUI
-                inputValue={this.state.inputValue}
-                list={this.state.list}
-                changeInputValue={this.changeInputValue}
-                clickBtn={this.clickBtn}
-                deleteItem={this.deleteItem}
-            />
-        );
-    }
-    //--------关键代码------end
+            return (
+                 <TodoListUI inputValue = { this.state.inputValue }
+                user = { this.state.user }
+                changeInputValue = { this.changeInputValue }
+                clickBtn = { this.clickBtn }
+                deleteItem = { this.deleteItem }
+                />
+            );
+        }
+        //--------关键代码------end
 }
 export default TodoList;

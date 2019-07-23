@@ -19,11 +19,11 @@ const TodoListUi = (props)=>{
             <div style={{margin:'10px',width:'300px'}}>
                 <List
                     bordered
-                    dataSource={props.list}
+                    dataSource={props.user}
                     renderItem={
                         (item,index)=>(
                             <List.Item onClick={()=>{props.deleteItem(index)}}>
-                                {item}
+                                {item.uname}
                             </List.Item>
                         )
                     }
